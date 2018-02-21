@@ -118,10 +118,15 @@ imshow(uint8(fusedImg)); title('Fused Image');
 saveas(fig3, 'hw3_fig3.jpg');
 
 %% Extra Credit: Create a Green/Blue Color Overlay.
-% Specify Brain image as green and Atlas image as blue.
-colorChannels = [0 1 2];
-
-colorOverlayImg = imfuse(Brain, newAtlas, 'ColorChannels', colorChannels);
+% Specify Brain image as blue and Atlas image as green.
+[M, N] = size(Brain);
 fig4 = figure(4);
-imshow(colorOverlayImg); title('Color Overlay Image');
+colorOverlayImg1 = imfuse(Brain, newAtlasEdges, 'ColorChannels', [0 2 1]);
+colorOverlayImg2 = imfuse(Brain, newAtlasEdges, 'ColorChannels', [0 1 2]);
+subplot(1,2,1);
+imshow(colorOverlayImg1); title('Atlas (Green), MRI (Blue)');
+subplot(1,2,2);
+imshow(colorOverlayImg2); title('Atlas (Blue), MRI (Green)');
 saveas(fig4, 'hw3_fig4.jpg');
+
+close all;
