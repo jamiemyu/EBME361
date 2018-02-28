@@ -94,7 +94,7 @@ fprintf('The average Euclidean distance is %.4f\n', avgDist);
 
 %% Create Edge Image of Atlas Image Superimposed on transformed MRI image.
 newAtlasEdges = edge(newAtlas, 'canny');
-overlayImage = imoverlay(Brain, newAtlasEdges);
+overlayImage = imoverlay(Brain, newAtlasEdges, 'green');
 fig2 = figure(2);
 imshow(overlayImage); title('Contoured Brain Image')
 saveas(fig2, 'hw3_fig2.jpg');
@@ -118,8 +118,7 @@ imshow(uint8(fusedImg)); title('Fused Image');
 saveas(fig3, 'hw3_fig3.jpg');
 
 %% Extra Credit: Create a Green/Blue Color Overlay.
-% Specify Brain image as blue and Atlas image as green.
-[M, N] = size(Brain);
+% Specify Brain image as blue and Atlas image and green and vice versa.
 fig4 = figure(4);
 colorOverlayImg1 = imfuse(Brain, newAtlasEdges, 'ColorChannels', [0 2 1]);
 colorOverlayImg2 = imfuse(Brain, newAtlasEdges, 'ColorChannels', [0 1 2]);
@@ -128,5 +127,3 @@ imshow(colorOverlayImg1); title('Atlas (Green), MRI (Blue)');
 subplot(1,2,2);
 imshow(colorOverlayImg2); title('Atlas (Blue), MRI (Green)');
 saveas(fig4, 'hw3_fig4.jpg');
-
-close all;
