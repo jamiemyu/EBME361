@@ -13,7 +13,7 @@ close all; clc;
 % Define translation parameters.
 tx = -1.8;
 ty = -2.1;
-+
+
 X = 1:length(Contrast2);
 Y = 1:length(Contrast2);
 [X, Y] = meshgrid(X, Y);
