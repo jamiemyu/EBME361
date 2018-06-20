@@ -26,13 +26,24 @@ saveas(fig1, 'problem2_fig1.jpg');
 %% Problem 3: Sobel edge filtering using imfilter()
 clear; close all; clc;
 % Load the data.
-f = imread('TUMOR.tif');
+f = mat2gray(imread('TUMOR.tif'));
 fig3 = figure(3); imshow(f); title('original tumor image');
 
 % Apply the Sobel filter to the image.
-outputImg = edge(f(:,:,1), 'sobel', 0.13);
-fig4 = figure(4); imshow(outputImg); title('Sobel filtered image');
-saveas(fig4, 'problem3_fig1.jpg');
+% outputImg = edge(f(:,:,1), 'sobel', 0.13);
+% fig4 = figure(4); imshow(outputImg); title('Sobel filtered image');
+% saveas(fig4, 'problem3_fig1.jpg');
+h_x = [-1, -2, -1; 0, 0, 0; 1, 2, 1];
+h_y = h_x';
+
+% x- and y- components of Sobel gradient.
+g_x = imfilter(f, h_x, 'conv');
+g_y = imfilter(f, h_y, 'conv');
+
+g = hypot(double(g_x), double(g_y));
+level = graythresh(g);
+gThresh = imbinarize(rgb2gray(g), level);
+fig4 = figure(4); imshow(gThresh);
 
 %% Problem 4: Investigate edge detection on the image, EDGES.mat
 close all; clear; clc;
